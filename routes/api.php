@@ -38,6 +38,27 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::get('options/{key}', OptionController::class);
 
+// Health check endpoint for Railway (API route with lighter middleware)
+Route::get('/health', function () {
+    try {
+        return response()->json([
+            'status' => 'healthy',
+            'service' => 'WhatsML API',
+            'version' => '1.0.0',
+            'timestamp' => now()->toISOString(),
+            'uptime' => 'running',
+            'environment' => app()->environment(),
+            'php_version' => PHP_VERSION
+        ], 200);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'unhealthy',
+            'error' => $e->getMessage(),
+            'timestamp' => now()->toISOString()
+        ], 500);
+    }
+});
+
 
 
 
