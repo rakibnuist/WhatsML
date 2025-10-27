@@ -118,6 +118,12 @@ Route::get('/mark-installed', function () {
     }
 });
 
+// Override home route to bypass installation check
+Route::get('/app', function () {
+    // Force bypass installation check
+    return app(\App\Http\Controllers\Web\WebPageController::class)->home();
+});
+
 // Test installer requirements endpoint
 Route::get('/test-requirements', function () {
     $requirements = [

@@ -15,9 +15,10 @@ class WebPageController extends Controller
 
     public function home()
     {
-        if (!file_exists(base_path('public/uploads/installed'))) {
-            return redirect('/install');
-        }
+        // Temporarily bypass installation check for testing
+        // if (!file_exists(base_path('public/uploads/installed'))) {
+        //     return redirect('/install');
+        // }
         SeoMeta::init('seo_home');
         $testimonials = Post::where('type', 'testimonial')
             ->with('excerpt', 'preview', 'shortDescription')
