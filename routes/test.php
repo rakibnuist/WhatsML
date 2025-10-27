@@ -62,6 +62,35 @@ Route::get('/install-working', function () {
     return response()->file(public_path('install-debug.html'));
 });
 
+// Skip installation route
+Route::get('/skip-install', function () {
+    try {
+        // Run migrations
+        Artisan::call('migrate', ['--force' => true]);
+        
+        // Create storage link
+        Artisan::call('storage:link');
+        
+        // Create installed file
+        $installedPath = base_path('public/uploads');
+        if (!File::exists($installedPath)) {
+            File::makeDirectory($installedPath, 0755, true);
+        }
+        File::put($installedPath . '/installed', now()->toISOString());
+        
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Installation skipped successfully. Application is ready to use.',
+            'redirect_url' => '/'
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Failed to skip installation: ' . $e->getMessage()
+        ], 400);
+    }
+});
+
 // Test installer requirements endpoint
 Route::get('/test-requirements', function () {
     $requirements = [
