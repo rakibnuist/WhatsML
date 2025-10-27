@@ -14,12 +14,6 @@ touch modules/*/resources/views/.gitkeep
 echo "📊 Running database migrations..."
 php artisan migrate --force
 
-# Clear and cache configuration
-echo "⚡ Optimizing application..."
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
-
 # Create storage link if needed
 echo "🔗 Creating storage link..."
 php artisan storage:link

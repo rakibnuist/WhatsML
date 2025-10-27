@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\GoogleAuthController;
 
+// Include test routes
+require_once __DIR__ . '/test.php';
+
 
 
 Route::patch('set-locale/{locale}', [LocaleController::class, 'update'])->name('set-locale');
