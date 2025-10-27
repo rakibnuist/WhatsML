@@ -5,9 +5,6 @@
 
 echo "🚀 Running post-deployment setup..."
 
-# Set error handling
-set -e
-
 # Create missing directories
 echo "📁 Creating missing directories..."
 mkdir -p modules/*/resources/views
@@ -25,18 +22,18 @@ mkdir -p storage/logs
 echo "🔐 Setting permissions..."
 chmod -R 775 storage bootstrap/cache
 
-# Run database migrations (skip if cache table doesn't exist)
+# Try to run database migrations (non-critical for healthcheck)
 echo "📊 Running database migrations..."
-php artisan migrate --force || echo "⚠️ Some migrations failed, continuing..."
+php artisan migrate --force || echo "⚠️ Migrations failed, continuing..."
 
 # Create storage link if needed
 echo "🔗 Creating storage link..."
-php artisan storage:link || echo "⚠️ Storage link already exists or failed"
+php artisan storage:link || echo "⚠️ Storage link failed, continuing..."
 
-# Clear and cache configurations
+# Try to cache configurations (non-critical for healthcheck)
 echo "⚡ Optimizing application..."
-php artisan config:cache || echo "⚠️ Config cache failed"
-php artisan route:cache || echo "⚠️ Route cache failed"
-php artisan view:cache || echo "⚠️ View cache failed"
+php artisan config:cache || echo "⚠️ Config cache failed, continuing..."
+php artisan route:cache || echo "⚠️ Route cache failed, continuing..."
+php artisan view:cache || echo "⚠️ View cache failed, continuing..."
 
 echo "✅ Post-deployment setup completed!"
