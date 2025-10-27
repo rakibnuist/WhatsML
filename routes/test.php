@@ -44,6 +44,11 @@ Route::get('/simple-install', function () {
     return response()->file(public_path('install.html'));
 });
 
+// Fixed installer route
+Route::get('/install-fixed', function () {
+    return view('installer.fixed');
+});
+
 // Debug installer route
 Route::get('/install-debug', function () {
     return response()->file(public_path('install-debug.html'));
