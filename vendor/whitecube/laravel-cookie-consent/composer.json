@@ -1,0 +1,60 @@
+{
+    "name": "whitecube/laravel-cookie-consent",
+    "description": "Register, configure and ask for cookies consent in a EU-compliant way.",
+    "keywords": [
+        "whitecube",
+        "laravel",
+        "cookies",
+        "gdpr",
+        "eu",
+        "compliant"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Whitecube",
+            "email": "hello@whitecube.be"
+        },
+        {
+            "name": "Toon Van den Bos",
+            "email": "toon@whitecube.be"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "laravel/framework": "^9|^10|^11|^12"
+    },
+    "require-dev": {
+        "pestphp/pest": "^2.0|^3.7",
+        "mockery/mockery": "^1.5",
+        "orchestra/testbench": "^8.5|^9.0|^10.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Whitecube\\LaravelCookieConsent\\": "src/",
+            "Whitecube\\LaravelCookieConsent\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Whitecube\\LaravelCookieConsent\\ServiceProvider"
+            ],
+            "aliases": {
+                "Cookies": "Whitecube\\LaravelCookieConsent\\Facades\\Cookies"
+            }
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@php vendor/bin/testbench package:discover --ansi"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

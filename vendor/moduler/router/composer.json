@@ -1,0 +1,22 @@
+{
+    "name": "moduler/router",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Moduler\\Routers\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Moduler\\Routers\\RouterServiceProvider"
+            ],
+            "aliases": {
+              
+            }
+        }
+    }
+}

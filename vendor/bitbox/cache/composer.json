@@ -1,0 +1,22 @@
+{
+    "name": "bitbox/cache",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Bitbox\\Cache\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bitbox\\Cache\\BitCacheServiceProvider"
+            ],
+            "aliases": {
+                "Installer": "Bitbox\\Cache\\Facades\\Installer"
+            }
+        }
+    }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "whatsml-production",
+  "version": "1.0.0",
+  "description": "WhatsML Production Deployment Scripts",
+  "scripts": {
+    "build": "npm run build:root",
+    "build:root": "vite build",
+    "build:qa-reply": "vite build --config modules/QAReply/vite.config.js",
+    "build:whatsapp": "vite build --config modules/Whatsapp/vite.config.js",
+    "build:whatsapp-web": "vite build --config modules/WhatsappWeb/vite.config.js",
+    "build:web-scraping": "vite build --config modules/WebScraping/vite.config.js",
+    "build:number-checker": "vite build --config modules/NumberChecker/vite.config.js",
+    "postinstall": "npm run build",
+    "start": "php artisan serve --host=0.0.0.0 --port=$PORT"
+  },
+  "engines": {
+    "node": ">=18.19.0",
+    "npm": ">=9.0.0"
+  }
+}
