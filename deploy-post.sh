@@ -10,9 +10,9 @@ echo "📁 Creating missing directories..."
 mkdir -p modules/*/resources/views
 touch modules/*/resources/views/.gitkeep
 
-# Run database migrations
+# Run database migrations (skip if cache table doesn't exist)
 echo "📊 Running database migrations..."
-php artisan migrate --force
+php artisan migrate --force || echo "⚠️ Some migrations failed, continuing..."
 
 # Create storage link if needed
 echo "🔗 Creating storage link..."

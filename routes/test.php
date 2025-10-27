@@ -12,11 +12,18 @@ Route::get('/test', function () {
     ]);
 });
 
+// Health check endpoint for Railway
 Route::get('/health', function () {
     return response()->json([
         'status' => 'healthy',
         'service' => 'WhatsML',
         'version' => '1.0.0',
-        'timestamp' => now()
+        'timestamp' => now(),
+        'uptime' => 'running'
     ]);
+});
+
+// Simple ping endpoint
+Route::get('/ping', function () {
+    return response()->json(['pong' => true, 'timestamp' => now()]);
 });
