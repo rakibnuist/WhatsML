@@ -97,18 +97,18 @@ Route::get('/skip-install', function () {
 // Simple mark as installed route
 Route::get('/mark-installed', function () {
     try {
-        // Create installed file
+        // Create installed file using simple file operations
         $installedPath = base_path('public/uploads');
-        if (!File::exists($installedPath)) {
-            File::makeDirectory($installedPath, 0755, true);
+        if (!is_dir($installedPath)) {
+            mkdir($installedPath, 0755, true);
         }
-        File::put($installedPath . '/installed', now()->toISOString());
+        file_put_contents($installedPath . '/installed', date('c'));
         
         return response()->json([
             'status' => 'success',
             'message' => 'Application marked as installed successfully.',
             'installed_file' => $installedPath . '/installed',
-            'file_exists' => File::exists($installedPath . '/installed')
+            'file_exists' => file_exists($installedPath . '/installed')
         ]);
     } catch (\Exception $e) {
         return response()->json([
