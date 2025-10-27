@@ -22,6 +22,35 @@ mkdir -p storage/logs
 echo "🔐 Setting permissions..."
 chmod -R 775 storage bootstrap/cache
 
+# Generate APP_KEY if not set
+echo "🔑 Generating application key..."
+if [ -z "$APP_KEY" ]; then
+    export APP_KEY=$(php -r "echo 'base64:' . base64_encode(random_bytes(32));")
+    echo "Generated APP_KEY: ${APP_KEY:0:20}..."
+fi
+
+# Set basic environment variables if not set
+echo "⚙️ Setting basic environment variables..."
+export APP_NAME="${APP_NAME:-WhatsML}"
+export APP_ENV="${APP_ENV:-production}"
+export APP_DEBUG="${APP_DEBUG:-false}"
+export APP_URL="${APP_URL:-https://whatsml-production-d457.up.railway.app}"
+
+# Set database to file-based SQLite for reliability
+echo "🗄️ Configuring database..."
+export DB_CONNECTION="${DB_CONNECTION:-sqlite}"
+export DB_DATABASE="${DB_DATABASE:-database/database.sqlite}"
+
+# Create SQLite database file if it doesn't exist
+mkdir -p database
+touch database/database.sqlite
+
+# Set session and cache to file-based for reliability
+echo "💾 Configuring sessions and cache..."
+export SESSION_DRIVER="${SESSION_DRIVER:-file}"
+export CACHE_DRIVER="${CACHE_DRIVER:-file}"
+export QUEUE_CONNECTION="${QUEUE_CONNECTION:-sync}"
+
 # Try to run database migrations (non-critical for healthcheck)
 echo "📊 Running database migrations..."
 php artisan migrate --force || echo "⚠️ Migrations failed, continuing..."
