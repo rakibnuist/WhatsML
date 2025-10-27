@@ -61,6 +61,7 @@ class ComposerStaticInit83d7096caecb9645d10c17955eb8a9fd
         '320163ac6b93aebe3dc25b60a0533d56' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/helpers.php',
         '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
         'fdb3b5f01b3ed818a713c5450349237f' => __DIR__ . '/../..' . '/app/Helpers/functions.php',
+        'b78a998ee2625aa239c830ae9636896a' => __DIR__ . '/../..' . '/app/Helpers/DebugHelper.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -1029,6 +1030,7 @@ class ComposerStaticInit83d7096caecb9645d10c17955eb8a9fd
         'App\\Actions\\Blog' => __DIR__ . '/../..' . '/app/Actions/Blog.php',
         'App\\Actions\\OptionUpdate' => __DIR__ . '/../..' . '/app/Actions/OptionUpdate.php',
         'App\\Actions\\Page' => __DIR__ . '/../..' . '/app/Actions/Page.php',
+        'App\\Console\\Commands\\DebugInfo' => __DIR__ . '/../..' . '/app/Console/Commands/DebugInfo.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Contacts\\GatewayContact' => __DIR__ . '/../..' . '/app/Contacts/GatewayContact.php',
         'App\\Contracts\\ChatServiceContract' => __DIR__ . '/../..' . '/app/Contracts/ChatServiceContract.php',
@@ -1054,6 +1056,7 @@ class ComposerStaticInit83d7096caecb9645d10c17955eb8a9fd
         'App\\Gateway\\Stripe' => __DIR__ . '/../..' . '/app/Gateway/Stripe.php',
         'App\\Gateway\\Thawani' => __DIR__ . '/../..' . '/app/Gateway/Thawani.php',
         'App\\Gateway\\Toyyibpay' => __DIR__ . '/../..' . '/app/Gateway/Toyyibpay.php',
+        'App\\Helpers\\DebugHelper' => __DIR__ . '/../..' . '/app/Helpers/DebugHelper.php',
         'App\\Helpers\\MenuHelper' => __DIR__ . '/../..' . '/app/Helpers/MenuHelper.php',
         'App\\Helpers\\ModelHelper' => __DIR__ . '/../..' . '/app/Helpers/ModelHelper.php',
         'App\\Helpers\\ModelHelperConfig' => __DIR__ . '/../..' . '/app/Helpers/ModelHelperConfig.php',

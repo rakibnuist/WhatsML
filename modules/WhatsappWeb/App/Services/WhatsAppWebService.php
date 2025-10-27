@@ -15,8 +15,14 @@ class WhatsAppWebService
     public function apiClient()
     {
         $baseApiUrl = Config::get('whatsapp-web.base_url') ?? '';
+        $apiKey = env('WHATSAPP_WEB_API_KEY', '12345');
+        
+        if ($apiKey === '12345') {
+            \Log::warning('WhatsApp Web API key is using default value. Please set WHATSAPP_WEB_API_KEY in your .env file');
+        }
+        
         return Http::baseUrl(url: $baseApiUrl)->withHeaders([
-            'X-API-Key' => '12345',
+            'X-API-Key' => $apiKey,
         ]);
     }
 

@@ -55,6 +55,11 @@ export QUEUE_CONNECTION="${QUEUE_CONNECTION:-sync}"
 echo "📊 Running database migrations..."
 php artisan migrate --force || echo "⚠️ Migrations failed, continuing..."
 
+# Create uploads directory for installer
+echo "📁 Creating uploads directory..."
+mkdir -p public/uploads
+chmod 775 public/uploads
+
 # Create storage link if needed
 echo "🔗 Creating storage link..."
 php artisan storage:link || echo "⚠️ Storage link failed, continuing..."

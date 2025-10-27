@@ -46,27 +46,40 @@ class ContactController extends Controller
             'message' => 'required|max:500',
         ]);
 
+        try {
+            $mailTo = env('MAIL_TO');
+            if (!$mailTo) {
+                \Log::warning('MAIL_TO environment variable is not set. Contact form submission will not send emails.');
+                return back()->with('warning', 'Contact form is temporarily unavailable. Please try again later.');
+            }
 
-        // try {
-        //     throw_if(!env('MAIL_TO'), 'Admin Email Not Set Yet!');
+            $data = [
+                'name' => $request->name,
+                'email' => $request->email,
+                'subject' => $request->subject,
+                'message' => $request->message,
+            ];
 
-        //     $data['name'] = $request->name;
-        //     $data['email'] = $request->email;
-        //     $data['subject'] = $request->subject;
-        //     $data['message'] = $request->message;
-
-
-        //     switch (env('QUEUE_MAIL')) {
-        //         case true:
-        //             Mail::to(env('MAIL_TO'))->queue(new ContactMail($data));
-        //             break;
-        //         default:
-        //             Mail::to(env('MAIL_TO'))->send(new ContactMail($data));
-        //             break;
-        //     }
-        // } catch (Exception $e) {
-        //     return back()->with('danger', $e->getMessage());
-        // }
-        return back()->with('success', 'Message has been send successfully');
+            $useQueue = env('QUEUE_MAIL', false);
+            
+            if ($useQueue) {
+                Mail::to($mailTo)->queue(new ContactMail($data));
+                \Log::info('Contact form email queued for sending', ['email' => $request->email]);
+            } else {
+                Mail::to($mailTo)->send(new ContactMail($data));
+                \Log::info('Contact form email sent immediately', ['email' => $request->email]);
+            }
+            
+            return back()->with('success', 'Message has been sent successfully');
+            
+        } catch (Exception $e) {
+            \Log::error('Failed to send contact form email', [
+                'error' => $e->getMessage(),
+                'email' => $request->email,
+                'subject' => $request->subject
+            ]);
+            
+            return back()->with('danger', 'Failed to send message. Please try again later.');
+        }
     }
 }

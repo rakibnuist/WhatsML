@@ -58,7 +58,8 @@
       "Modules\\": "modules/"
     },
     "files": [
-      "app/Helpers/functions.php"
+      "app/Helpers/functions.php",
+      "app/Helpers/DebugHelper.php"
     ]
   },
   "autoload-dev": {
