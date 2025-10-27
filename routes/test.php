@@ -44,6 +44,11 @@ Route::get('/simple-install', function () {
     return response()->file(public_path('install.html'));
 });
 
+// Debug installer route
+Route::get('/install-debug', function () {
+    return response()->file(public_path('install-debug.html'));
+});
+
 // Test installer requirements endpoint
 Route::get('/test-requirements', function () {
     $requirements = [

@@ -6,7 +6,7 @@
     <title>WhatsML Installation</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="">
     <style>
         body {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -273,20 +273,33 @@
             showWaitingBar(1);
             
             try {
+                console.log('Starting requirements check...');
                 const response = await fetch('/install-requirements');
+                console.log('Response status:', response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
                 const data = await response.json();
+                console.log('Requirements data:', data);
                 
                 const requirementsList = document.getElementById('requirementsList');
                 const requirements = Object.entries(data.requirements);
                 
+                console.log('Processing requirements:', requirements);
+                
                 requirements.forEach(([requirement, status], index) => {
                     const item = requirementsList.children[index];
-                    const icon = item.querySelector('.status-icon');
-                    
-                    if (status) {
-                        icon.className = 'fas fa-check-circle status-icon success';
-                    } else {
-                        icon.className = 'fas fa-times-circle status-icon error';
+                    if (item) {
+                        const icon = item.querySelector('.status-icon');
+                        if (icon) {
+                            if (status) {
+                                icon.className = 'fas fa-check-circle status-icon success';
+                            } else {
+                                icon.className = 'fas fa-times-circle status-icon error';
+                            }
+                        }
                     }
                 });
                 
@@ -294,7 +307,9 @@
                 
                 if (data.all_met) {
                     enableNextButton(1);
+                    console.log('All requirements met, next button enabled');
                 } else {
+                    console.log('Some requirements not met');
                     Swal.fire({
                         title: 'Requirements Not Met',
                         text: 'Some system requirements are not met. Please check your server configuration.',
@@ -302,6 +317,7 @@
                     });
                 }
             } catch (error) {
+                console.error('Error checking requirements:', error);
                 hideWaitingBar(1);
                 Swal.fire({
                     title: 'Error',
@@ -400,7 +416,10 @@
         
         // Start the installation process
         document.addEventListener('DOMContentLoaded', () => {
-            checkRequirements();
+            console.log('DOM loaded, starting requirements check...');
+            setTimeout(() => {
+                checkRequirements();
+            }, 100); // Small delay to ensure everything is loaded
         });
     </script>
 </body>
