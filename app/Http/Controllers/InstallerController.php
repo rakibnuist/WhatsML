@@ -37,7 +37,8 @@ class InstallerController extends Controller
 
         return response()->json([
             'requirements' => $requirements,
-            'all_met' => $allRequirementsMet
+            'all_met' => $allRequirementsMet,
+            'php_version' => PHP_VERSION
         ]);
     }
 
