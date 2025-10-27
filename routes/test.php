@@ -46,11 +46,19 @@ Route::get('/simple-install', function () {
 
 // Fixed installer route
 Route::get('/install-fixed', function () {
-    return view('installer.fixed');
+    $html = file_get_contents(public_path('install.html'));
+    // Replace the CSRF token issue
+    $html = str_replace('content="{{ csrf_token() }}"', 'content=""', $html);
+    return response($html)->header('Content-Type', 'text/html');
 });
 
 // Debug installer route
 Route::get('/install-debug', function () {
+    return response()->file(public_path('install-debug.html'));
+});
+
+// Working installer route
+Route::get('/install-working', function () {
     return response()->file(public_path('install-debug.html'));
 });
 
