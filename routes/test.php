@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Artisan;
+
 // Simple test route for Railway deployment
 Route::get('/test', function () {
     return response()->json([
