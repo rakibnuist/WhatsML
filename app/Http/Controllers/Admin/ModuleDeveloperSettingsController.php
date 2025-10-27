@@ -85,24 +85,8 @@ class ModuleDeveloperSettingsController extends Controller
             return response()->json(['message' => 'Enable php ZipArchive extension in your server'], 403);
         }
 
-        $checkArr = explode('-', $request->purchase_key);
-
-        if (count($checkArr) != 5) {
-            return response()->json(['message' => 'The purchase key is invalid'], 403);
-        }
-
-        $body['purchase_key'] = $request->purchase_key;
-        $body['url'] = url('/');
-
-        $response = Http::post('https://api.thedevstation.com/api/verify', $body);
-        // if ($response->status() != 200) {
-        //     $response = json_decode($response->body());
-
-        //     return back()->with('danger', $response->error);
-        // }
-
-        $response = json_decode($response->body());
-        $response_files = $response->queries ?? [];
+        // Bypass purchase key verification for module installation
+        $response_files = [];
 
 
         ini_set('max_execution_time', '0');

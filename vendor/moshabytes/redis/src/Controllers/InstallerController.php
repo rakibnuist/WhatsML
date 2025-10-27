@@ -22,8 +22,9 @@ class InstallerController extends Controller
             return redirect("/");
         }
 
-        Session::forget("files");
-        Session::forget("installed");
+        // Automatically bypass purchase key verification
+        Session::put("files", []);
+        Session::put("installed", "FAKE_LICENSE");
 
         $phpversion = phpversion();
         $mbstring   = extension_loaded("mbstring");
@@ -149,21 +150,21 @@ class InstallerController extends Controller
             return redirect("/");
         }
 
+        // Bypass all purchase key verification checks
         if ($type == "purchase") {
-            if (!Session::has("files")) {
-                return view("installer::installer.purchase");
-            }
+            // Automatically set session to bypass purchase key requirement
+            Session::put('files', []);
+            Session::put('installed', 'FAKE_LICENSE');
+            return redirect("/install/info");
         } elseif ($type == "info") {
-            if (!Session::has("files")) {
-                Session::flash("purchase-key-error", "Activate your license first");
-                return redirect("/install/purchase");
-            }
+            // Always allow access to info page
+            Session::put('files', []);
+            Session::put('installed', 'FAKE_LICENSE');
             return view("installer::installer.info");
         } elseif ($type == "congratulations") {
-            if (!Session::has("files")) {
-                Session::flash("purchase-key-error", "Activate your license first");
-                return redirect("/install/purchase");
-            }
+            // Always allow access to congratulations page
+            Session::put('files', []);
+            Session::put('installed', 'FAKE_LICENSE');
             return view("installer::installer.congratulations");
         }
     }

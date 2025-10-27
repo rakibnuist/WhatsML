@@ -12,14 +12,14 @@
    <!-- Fonts -->
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
    <!-- Icons -->
-   <link rel="stylesheet" href="{{ asset('assets/vendor/nucleo/css/nucleo.css') }}" type="text/css">
-   <link rel="stylesheet" href="{{ asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" type="text/css">
-   <link rel='stylesheet' href="{{ asset('assets/css/uicons-regular-straight.css') }}">
+   <link rel="stylesheet" href="{{ asset('assets/installer/vendor/nucleo/css/nucleo.css') }}" type="text/css">
+   <link rel="stylesheet" href="{{ asset('assets/installer/vendor/@fontawesome/fontawesome-free/css/all.min.css') }}" type="text/css">
+   <link rel='stylesheet' href="{{ asset('assets/installer/css/uicons-regular-straight.css') }}">
    <!-- Page plugins -->
-   <link rel="stylesheet" href="{{ asset('assets/css/argon.css') }}" type="text/css">
-   <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/toastify-js/src/toastify.css') }}">
-   <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/pace/pace-theme-default.min.css') }}">
-   <link href="{{ asset('assets/css/invoice.css') }}" rel="stylesheet">
+   <link rel="stylesheet" href="{{ asset('assets/installer/css/argon.css') }}" type="text/css">
+   <link rel="stylesheet" type="text/css" href="{{ asset('assets/installer/plugins/toastify-js/src/toastify.css') }}">
+   <link rel="stylesheet" type="text/css" href="{{ asset('assets/installer/plugins/pace/pace-theme-default.min.css') }}">
+   <link href="{{ asset('assets/installer/css/invoice.css') }}" rel="stylesheet">
    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}" type="text/css">
    @stack('css')
 </head>
@@ -65,16 +65,16 @@
       </div>
    </div>
 </div>
-<script src="{{ asset('assets/vendor/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('assets/vendor/js-cookie/js.cookie.js') }}"></script>
-<script src="{{ asset('assets/plugins/sweetalert/sweetalert2.all.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/toastify-js/src/toastify.js') }}"></script>
+<script src="{{ asset('assets/installer/vendor/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/installer/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/installer/vendor/js-cookie/js.cookie.js') }}"></script>
+<script src="{{ asset('assets/installer/plugins/sweetalert/sweetalert2.all.min.js') }}"></script>
+<script src="{{ asset('assets/installer/plugins/toastify-js/src/toastify.js') }}"></script>
 <!-- Plugins  -->
-<script src="{{ asset('assets/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/form.js?v=1.1') }}"></script>
-<script src="{{ asset('assets/plugins/pace/pace.min.js') }}"></script>
-<script src="{{ asset('assets/js/argon.js?v=1.1.1') }}"></script>
+<script src="{{ asset('assets/installer/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('assets/installer/plugins/form.js?v=1.1') }}"></script>
+<script src="{{ asset('assets/installer/plugins/pace/pace.min.js') }}"></script>
+<script src="{{ asset('assets/installer/js/argon.js?v=1.1.1') }}"></script>
 @stack('js')   
 </body>
 </html>
