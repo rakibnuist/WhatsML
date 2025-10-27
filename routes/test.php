@@ -91,6 +91,30 @@ Route::get('/skip-install', function () {
     }
 });
 
+// Simple mark as installed route
+Route::get('/mark-installed', function () {
+    try {
+        // Create installed file
+        $installedPath = base_path('public/uploads');
+        if (!File::exists($installedPath)) {
+            File::makeDirectory($installedPath, 0755, true);
+        }
+        File::put($installedPath . '/installed', now()->toISOString());
+        
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Application marked as installed successfully.',
+            'installed_file' => $installedPath . '/installed',
+            'file_exists' => File::exists($installedPath . '/installed')
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Failed to mark as installed: ' . $e->getMessage()
+        ], 400);
+    }
+});
+
 // Test installer requirements endpoint
 Route::get('/test-requirements', function () {
     $requirements = [
